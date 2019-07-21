@@ -1,4 +1,6 @@
+import os
 import time
+from time import sleep
 
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
@@ -36,7 +38,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
     def test_can_start_a_list_and_retrieve_it_later(self):
         # Edith has heard about a cool new online to-do app. She goes
         # to check out its homepage
+        sleep(1)
         self.browser.get(self.live_server_url)
+
 
         # She notices the page title and header mention to-do lists
         self.assertIn('To-Do', self.browser.title)
