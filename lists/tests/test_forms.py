@@ -11,6 +11,6 @@ class ItemFormTest(TestCase):
         self.assertIn('class="form-control input-lg"', form.as_p())
 
     def test_form_validation_for_blank_items(self):
-        form = ItemForm(data={'text': ''})
+        form = ItemForm(data={'id_text': ''})
         self.assertFalse(form.is_valid())
         self.assertEqual(form.errors['text'], [EMPTY_ITEM_ERROR])
