@@ -1,11 +1,6 @@
-from time import sleep
+from .base import FunctionalTest
 from selenium import webdriver
-
 from selenium.webdriver.common.keys import Keys
-
-from functional_tests.base import FunctionalTest
-
-MAX_WAIT = 10
 
 
 class NewVisitorTest(FunctionalTest):
@@ -13,7 +8,6 @@ class NewVisitorTest(FunctionalTest):
     def test_can_start_a_list_for_one_user(self):
         # Edith has heard about a cool new online to-do app. She goes
         # to check out its homepage
-        sleep(1)
         self.browser.get(self.live_server_url)
 
         # She notices the page title and header mention to-do lists
@@ -49,6 +43,7 @@ class NewVisitorTest(FunctionalTest):
         self.wait_for_row_in_list_table('1: Buy peacock feathers')
 
         # Satisfied, she goes back to sleep
+
 
     def test_multiple_users_can_start_lists_at_different_urls(self):
         # Edith starts a new to-do list
@@ -94,3 +89,4 @@ class NewVisitorTest(FunctionalTest):
         self.assertIn('Buy milk', page_text)
 
         # Satisfied, they both go back to sleep
+
