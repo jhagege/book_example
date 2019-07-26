@@ -44,6 +44,7 @@ class ItemValidationTest(FunctionalTest):
         self.wait_for_row_in_list_table('1: Buy milk')
         self.wait_for_row_in_list_table('2: Make tea')
 
+
     def test_cannot_add_duplicate_items(self):
         # Edith goes to the home page and starts a new list
         self.browser.get(self.live_server_url)
@@ -60,6 +61,7 @@ class ItemValidationTest(FunctionalTest):
             self.get_error_element().text,
             "You've already got this in your list"
         ))
+
 
     def test_error_messages_are_cleared_on_input(self):
         # Edith starts a list and causes a validation error:

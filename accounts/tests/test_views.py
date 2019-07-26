@@ -1,6 +1,5 @@
 from django.test import TestCase
 from unittest.mock import patch, call
-
 from accounts.models import Token
 
 
@@ -11,6 +10,7 @@ class SendLoginEmailViewTest(TestCase):
             'email': 'edith@example.com'
         })
         self.assertRedirects(response, '/')
+
 
     @patch('accounts.views.send_mail')
     def test_sends_mail_to_address_from_post(self, mock_send_mail):
@@ -36,12 +36,14 @@ class SendLoginEmailViewTest(TestCase):
         )
         self.assertEqual(message.tags, "success")
 
+
     def test_creates_token_associated_with_email(self):
         self.client.post('/accounts/send_login_email', data={
             'email': 'edith@example.com'
         })
         token = Token.objects.first()
         self.assertEqual(token.email, 'edith@example.com')
+
 
     @patch('accounts.views.send_mail')
     def test_sends_link_to_login_using_token_uid(self, mock_send_mail):
@@ -55,6 +57,7 @@ class SendLoginEmailViewTest(TestCase):
         self.assertIn(expected_url, body)
 
 
+
 @patch('accounts.views.auth')
 class LoginViewTest(TestCase):
 
@@ -62,12 +65,14 @@ class LoginViewTest(TestCase):
         response = self.client.get('/accounts/login?token=abcd123')
         self.assertRedirects(response, '/')
 
+
     def test_calls_authenticate_with_uid_from_get_request(self, mock_auth):
         self.client.get('/accounts/login?token=abcd123')
         self.assertEqual(
             mock_auth.authenticate.call_args,
             call(uid='abcd123')
         )
+
 
     def test_calls_auth_login_with_user_if_there_is_one(self, mock_auth):
         response = self.client.get('/accounts/login?token=abcd123')

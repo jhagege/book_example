@@ -1,4 +1,3 @@
-import sys
 from django.contrib import auth, messages
 from django.core.mail import send_mail
 from django.shortcuts import redirect
@@ -32,3 +31,4 @@ def login(request):
     if user:
         auth.login(request, user)
     return redirect('/')
+
